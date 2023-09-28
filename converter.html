@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- TITLE -->
+        <title>UI Color Palette | by DNMV</title>
+
+        <!-- STYLE -->
+        <link rel="stylesheet" href="dist/style/main.css">
+        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+        <!-- FAVICON -->
+        <link rel="apple-touch-icon" sizes="180x180" href="./dist/img/ico/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="./dist/img/ico/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="./dist/img/ico/favicon-16x16.png">
+        <link rel="manifest" href="./dist/img/ico/site.webmanifest">
+
+        <!-- META TAGS -->
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="ui, ui color palette, flat ui colors, ui colors, flat color palette, color palette, ios colors, microsoft colors, flat colors, ui color palettes">
+        <meta name="description" content="Our website contains a lot of popular color palettes used in the development of WEB/Mobile UI">
+
+        <meta charset="UTF-8">
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://idnaumov.github.io/ui-color-palette/">
+        <meta property="og:title" content="UI Color Palette">
+        <meta property="og:description" content="Our website contains a lot of popular color palettes used in the development of WEB/Mobile UI">
+    </head>
+    <body>
+        <div id="app" :style="{ '--bg-color': bgColor, '--header-color': headerColor, '--text-color': textColor }">
+            <header>
+                <div class="name">
+                    <img src="./dist/img/logo.png" alt="Logo" width="30px">
+                    <a href="/" class="name__text">UI Color Palette</a>
+                </div>
+                <div class="bar" @click="expandMenu()" :class="{ 'menu-expanded': menuExpanded }"></div>
+                <ul class="menu" :class="{ 'menu-expanded': menuExpanded }">
+                    <li class="menu__item"><a href="index.html" class="menu__item-link">UI Color Palette</a></li>
+                    <li class="menu__item"><a href="#" class="menu__item-link" @click="changeTheme()">{{button_text}}</a></li>
+                </ul>
+            </header>
+            <div class="content">
+                <h1>RGB/HEX Converter</h1>
+                <h2>In the field below, insert the RGB or HEX Color Code. If you insert HEX, you will get RGB, and vice versa</h2>
+
+                <div class="converter">
+                    <input type="text" placeholder="Place RGB or HEX" id="converter-input" name="converter" v-model="converterInput">
+                    <br>
+                    <div class="labels">
+                        <label class="converter-result__label">Result: <span class="converter-output__text" @click="copyColor(rgbColor)">{{rgbColor}}</span></label>
+                    </div>
+                    <span class="info__text" :class="{ 'active': selectedInfo }">{{ copyText }}</span>
+                </div>
+            </div>
+
+            <footer>
+                <!-- <div class="name">
+                    <span class="name__text">UI Color Palette</span>
+                </div> -->
+                <div class="developer">
+                    <span class="developer__text">Made with <i class='fa fa-heart faa-pulse animated'></i> by <b>DNMV</b></span>
+                </div>
+                <div class="contacts">
+                    <span class="contacts__text">TG: <a href="https://t.me/dnmv_dev">dnmv_dev</a></span>
+                    <span class="contacts__text">VK: <a href="https://vk.com/dbright">dbright</a></span>
+                </div>
+            </footer>
+        </div>
+        <script src="./dist/js/vue.js"></script>
+        <script src="./dist/js/color_array.js"></script>
+        <script src="./dist/js/app.js"></script>
+        </body>
+    </html>

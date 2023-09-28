@@ -1,114 +1,97 @@
 <!DOCTYPE html>
-<html lang="en">
-<head> 
-    <!-- TITLE -->
-    <title>UI Color Palette</title>
+<html>
+    <head>
+        <!-- TITLE -->
+        <title>UI Color Palette | by DNMV</title>
 
-    <!-- FAVICON -->
-    <link rel="apple-touch-icon" sizes="180x180" href="./ico/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="./ico/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="./ico/favicon-16x16.png">
-    <link rel="manifest" href="./ico/site.webmanifest">
+        <!-- STYLE -->
+        <link rel="stylesheet" href="dist/style/main.css">
+        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
-    <!-- STYLES -->
-    <link rel="stylesheet" href="style/main.css">
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+        <!-- FAVICON -->
+        <link rel="apple-touch-icon" sizes="180x180" href="./dist/img/ico/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="./dist/img/ico/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="./dist/img/ico/favicon-16x16.png">
+        <link rel="manifest" href="./dist/img/ico/site.webmanifest">
 
-    <!-- META TAGS -->
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="keywords" content="ui, ui color palette, flat ui colors, ui colors, flat color palette, color palette, ios colors, microsoft colors, flat colors, ui color palettes">
-    <meta name="description" content="Our website contains a lot of popular color palettes used in the development of WEB/Mobile UI">
+        <!-- META TAGS -->
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="ui, ui color palette, flat ui colors, ui colors, flat color palette, color palette, ios colors, microsoft colors, flat colors, ui color palettes">
+        <meta name="description" content="Our website contains a lot of popular color palettes used in the development of WEB/Mobile UI">
 
-    <meta charset="UTF-8">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://idnaumov.github.io/ui-color-palette/">
-    <meta property="og:title" content="UI Color Palette">
-    <meta property="og:description" content="Our website contains a lot of popular color palettes used in the development of WEB/Mobile UI">
-    
-</head>
-<body id="app">
-    <div class="container">
-        <div class="nav__container" :class="{ 'menu-expanded': menuExpanded }">
-            <div 
-                class="bar" 
-                @click="expandMenu()"
-                :class="{ 'menu-expanded': menuExpanded }"
-            >
-            </div>
-            <div class="logo">
-                <span class="logo__text">UI Color Palette</span>
-            </div>
-            <nav :class="{ 'menu-expanded': menuExpanded }">
-                <ul class="palette-navigation">
-                    <li
-                        v-for="(item, index) in arr"
-                        :key="index"
-                        class="palette__item"
-                        :data-number="index"
-                        @click="showColors(index)"
-                    >
-                    <span class="palette-name__text">{{ item.name }}</span>
-                    </li>
+        <meta charset="UTF-8">
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://idnaumov.github.io/ui-color-palette/">
+        <meta property="og:title" content="UI Color Palette">
+        <meta property="og:description" content="Our website contains a lot of popular color palettes used in the development of WEB/Mobile UI">
+    </head>
+    <body>
+        <div id="app" :style="{ '--bg-color': bgColor, '--header-color': headerColor, '--text-color': textColor }">
+            <header>
+                <div class="name">
+                    <img src="./dist/img/logo.png" alt="Logo" width="30px">
+                    <a href="/" class="name__text">UI Color Palette</a>
+                </div>
+                <div class="bar" @click="expandMenu()" :class="{ 'menu-expanded': menuExpanded }"></div>
+                <ul class="menu" :class="{ 'menu-expanded': menuExpanded }">
+                    <li class="menu__item"><a href="#" class="menu__item-link" @click="showColors(0)" :class="{ active: 0 == selected}">Microsoft Colors</a></li>
+                    <li class="menu__item"><a href="#" class="menu__item-link" @click="showColors(1)" :class="{ active: 1 == selected}">iOS Colors</a></li>
+                    <li class="menu__item"><a href="#" class="menu__item-link" @click="showColors(2)" :class="{ active: 2 == selected}">Flat UI</a></li>
+                    <li class="menu__item"><a href="#" class="menu__item-link" @click="showColors(3)" :class="{ active: 3 == selected}">Material UI</a></li>
+                    <li class="menu__item" :class="{ 'menu-expanded': menuExpanded }"><a href="#" class="menu__item-link" @click="showMenu()">
+                        Tools
+                        <svg width="14" height="22" viewBox="0 0 14 22" fill="none" xmlns="http://www.w3.org/2000/svg" class="arrow__element" :class="{active: dropdown_visible == true}">
+                            <g id="arrow-down 1">
+                            <path id="Vector" class="arrow-down" d="M7.00032 14.6666C6.78224 14.6671 6.57091 14.5925 6.40298 14.4558L0.802982 9.87249C0.612386 9.71689 0.492518 9.4933 0.469768 9.25092C0.447018 9.00853 0.523234 8.76718 0.681658 8.57999C0.840082 8.39279 1.06772 8.27507 1.31453 8.25272C1.56132 8.23036 1.80705 8.30522 1.99766 8.46081L7.00032 12.5675L12.0031 8.60749C12.0984 8.53134 12.2083 8.47448 12.3262 8.44016C12.4442 8.40586 12.5678 8.39477 12.69 8.40755C12.8124 8.42032 12.931 8.45672 13.0388 8.51462C13.1467 8.57253 13.2419 8.65083 13.3191 8.74499C13.4045 8.83924 13.4691 8.94982 13.5092 9.06977C13.5491 9.18974 13.5634 9.31652 13.551 9.44217C13.5389 9.56781 13.5002 9.68961 13.4379 9.79993C13.3755 9.91026 13.2905 10.0067 13.1883 10.0833L7.58832 14.5108C7.41557 14.6259 7.20856 14.6808 7.00032 14.6666Z" fill="#2C2C2C"/>
+                            </g>
+                        </svg>
+                            
+
+                        <div class="dropdown__menu" :class="{ 'menu-expanded': menuExpanded }" v-if="dropdown_visible">
+                            <a href="/converter.html">RGB/HEX Converter</a>
+                        </div>
+                    </a></li>
+                    <li class="menu__item"><a href="#" class="menu__item-link" @click="changeTheme()">{{button_text}}</a></li>
                 </ul>
-                <div class="tools">
-                    <span class="tools__text">Tools:</span>
-                    <a class="tools__link" href="rgbtohex.html" rel="canonical">
-                        RGB/HEX Converter
-                    </a>
-                </div>
-                <div class="contacts">
-                    <span class="contacts__text">Contacts:</span>
-                    <a class="contacts-author__text" href="https://t.me/dnmv_dev">
-                        TG: dnmv_dev
-                    </a>
-                    <a class="contacts-author__text" href="https://vk.com/dbright">
-                        VK: dbright
-                    </a>
-                </div>
-            </nav>
-        </div>
-
-        <div class="content__container">
-            <div class="content__header">
-                <span class="header__text">Made with <i class='fa fa-heart faa-pulse animated'></i> by <b>DNaumov</b></span>
-            </div>
-            <div v-if="selectedPalette" class="content__palette">
-                <h1 class="palette-name__text">{{ selectedPalette.name }}</h1>
-                <h2 class="palette-desc__text">{{ selectedPalette.description }}</h2>
-                <span class="info__text" :class="{ 'active': selectedInfo }">{{ copyText }}</span>
-                <ul class="palette-colors__list">
-                    <li
+            </header>
+            <div class="content">
+                <h1>{{selectedPalette.name}}</h1>
+                <h2>{{ selectedPalette.description }}</h2>
+                <h3 class="info__text" :class="{ 'active': selectedInfo }">{{ copyText }}</h3>
+                <ul class="palette">
+                    <li 
+                        class="palette__item"
                         v-for="color in selectedColors"
                         :key="color.hex"
-                        class="color__item"
                         :style="{ backgroundColor: color.hex }"
                         @click="copyColor(color.hex)"
                     >
                     <span :style="{ color: color.color }" class="color-description">
-                    {{ color.name }}
+                        {{ color.name }}
                     </span>
                     <span :style="{ color: color.color }" class="color-hex__text">
-                    {{ color.hex }}
+                        {{ color.hex }}
                     </span>
                     </li>
                 </ul>
             </div>
+            <footer>
+                <!-- <div class="name">
+                    <span class="name__text">UI Color Palette</span>
+                </div> -->
+                <div class="developer">
+                    <span class="developer__text">Made with <i class='fa fa-heart faa-pulse animated'></i> by <b>DNMV</b></span>
+                </div>
+                <div class="contacts">
+                    <span class="contacts__text">TG: <a href="https://t.me/dnmv_dev">dnmv_dev</a></span>
+                    <span class="contacts__text">VK: <a href="https://vk.com/dbright">dbright</a></span>
+                </div>
+            </footer>
         </div>
-    </div>
 
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    <script src="./script/color_array.min.js"></script>
-    <script src="./script/app.min.js"></script>
-    
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-5RDB7ZDR73"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-5RDB7ZDR73');
-</script>
-</body>
+        <script src="./dist/js/vue.js"></script>
+        <script src="./dist/js/color_array.js"></script>
+        <script src="./dist/js/app.js"></script>
+    </body>
 </html>
